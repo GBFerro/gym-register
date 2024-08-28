@@ -25,7 +25,6 @@ app.options("/api/users/register", (_req, res) => {
   res.send(204);
 });
 
-
 connectToDatabase().then(() => {
   app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

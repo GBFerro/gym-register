@@ -19,6 +19,7 @@ interface Treino {
 
 const UserForm: React.FC = () => {
   const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
   const [rua, setRua] = useState("");
   const [numero, setNumero] = useState<number | "">("");
   const [cep, setCep] = useState("");
@@ -46,7 +47,16 @@ const UserForm: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const formData = { nome, rua, numero, cep, idade, planoEscolhido, treinos };
+    const formData = {
+      nome,
+      cpf,
+      rua,
+      numero,
+      cep,
+      idade,
+      planoEscolhido,
+      treinos,
+    };
     try {
       const response = await fetch(`/api/users/register`, {
         method: "POST",
@@ -57,12 +67,8 @@ const UserForm: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-      console.log(result);
-
       if (response.ok) {
         alert("Usuário cadastrado com sucesso!");
-        // Redirecione ou limpe o formulário aqui
       } else {
         alert("Erro ao cadastrar usuário!");
       }
@@ -70,7 +76,6 @@ const UserForm: React.FC = () => {
       console.error("Erro ao enviar dados:", error);
       alert("Erro ao cadastrar usuário!");
     }
-    // Aqui você pode enviar os dados para o backend ou processá-los como desejar.
   };
 
   return (
@@ -81,6 +86,14 @@ const UserForm: React.FC = () => {
           type="text"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
+          required
+        />
+
+        <Label>CPF:</Label>
+        <Input
+          type="text"
+          value={cpf}
+          onChange={(e) => setCpf(e.target.value)}
           required
         />
 

@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
   };
 
   const handleConsultarClick = () => {
-    navigate("/cadastro");
+    navigate("/consultar");
   };
   return (
     <Container>

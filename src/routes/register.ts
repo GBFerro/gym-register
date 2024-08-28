@@ -21,4 +21,23 @@ router.post('/register', async (req, res) => {
   }
 });
 
+router.get('/consultar/:cpf', async (req, res) => {
+  try {
+    const { cpf } = req.params;
+    const db = getDatabase('academia');
+    const usersCollection = db.collection<User>('users');
+
+    const user = await usersCollection.findOne({ cpf });
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Erro ao buscar usuário:', error);
+    res.status(500).json({ error: "Erro ao buscar o usuário" });
+  }
+});
+
 export default router;
