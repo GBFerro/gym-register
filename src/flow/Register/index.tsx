@@ -47,19 +47,15 @@ const UserForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const formData = { nome, rua, numero, cep, idade, planoEscolhido, treinos };
-    console.log(process.env.REACT_APP_API_URL);
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/users/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`/api/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const result = await response.json();
       console.log(result);
