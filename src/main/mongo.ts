@@ -1,7 +1,11 @@
 import { MongoClient } from 'mongodb';
+const mongoUri = process.env.MONGO_URI;
 
-const uri = 'mongodb://localhost:27017';
-const client = new MongoClient(uri);
+if (!mongoUri) {
+  throw new Error("A variável de ambiente MONGO_URI não está definida!");
+}
+
+const client = new MongoClient(mongoUri);
 
 export const connectToDatabase = async () => {
   try {
