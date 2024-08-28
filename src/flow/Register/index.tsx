@@ -47,7 +47,7 @@ const UserForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const formData = { nome, rua, numero, cep, idade, planoEscolhido, treinos };
-    console.log(JSON.stringify(formData));
+    console.log(process.env.REACT_APP_API_URL);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/users/register`,
